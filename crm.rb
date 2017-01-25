@@ -5,13 +5,21 @@ require_relative 'contact'
 require 'sinatra'
 
 # fake data
-Contact.create('Mark', 'Zuckerberg', 'mark@facebook.com', 'CEO')
-Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
-Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
+# Contact.create('Mark', 'Zuckerberg', 'mark@facebook.com', 'CEO')
+# Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
+# Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
 
 get '/' do
   @crm_app_name = "Sahani's CRM"
    erb :index
+end
+
+get '/contacts' do
+  erb :contacts
+end
+
+get '/contacts/new' do
+  erb :new_contact
 end
 
 get '/contacts/:id' do
@@ -21,14 +29,6 @@ get '/contacts/:id' do
   else
     raise Sinatra::NotFound
   end
-end
-
-get '/contacts' do
-  erb :contacts
-end
-
-get '/contacts/new' do
-  erb :new_contact
 end
 
 post '/contacts' do
@@ -52,6 +52,16 @@ put '/contacts/:id' do
     @contact.last_name = params[:last_name]
     @contact.email = params[:email]
     @contact.note = params[:note]
+    redirect to '/contacts'
+  else
+    raise Sinatra::NotFound
+  end
+end
+
+delete '/contacts/:id' do
+  @contact = Contact.find(params[:id].to_i)
+  if @contact
+    @contact.delete
     redirect to '/contacts'
   else
     raise Sinatra::NotFound
