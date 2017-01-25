@@ -44,6 +44,10 @@ class Contact
     end
     return nil
   end
+  #it can also have the following definition. .find is a normal ruby function.
+  # def self.find(id)
+  #   @@contacts.find { |contact| contact.id == id }
+  # end
 
   # This method should allow you to specify
   # 1. which of the contact's attributes you want to update
