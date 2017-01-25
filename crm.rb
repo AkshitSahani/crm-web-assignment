@@ -6,16 +6,16 @@ require 'sinatra'
 
 # fake data
 Contact.create('Mark', 'Zuckerberg', 'mark@facebook.com', 'CEO')
-# Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
-# Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
+Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
+Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
 
 get '/' do
   @crm_app_name = "Sahani's CRM"
    erb :index
 end
 
-get '/contacts/1' do
-  @contact = Contact.find(1)
+get '/contacts/:id' do
+  @contact = Contact.find(params[:id].to_i)
   erb :show_contact
 end
 
