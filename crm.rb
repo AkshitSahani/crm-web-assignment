@@ -9,8 +9,9 @@ require 'sinatra'
 # Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
 # Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
 
+@@crm_app_name = "Sahani's CRM"
+
 get '/' do
-  @crm_app_name = "Sahani's CRM"
    erb :index
 end
 
@@ -66,4 +67,8 @@ delete '/contacts/:id' do
   else
     raise Sinatra::NotFound
   end
+end
+
+after do
+  ActiveRecord::Base.connection.close
 end
