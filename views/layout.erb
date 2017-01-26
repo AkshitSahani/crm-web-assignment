@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/styles.css">
-    <title></title>
+    <title> <%=@@crm_app_name%> </title>
   </head>
   <body>
-    <h1> <%=@crm_app_name%> </h1>
+    <h1> <%=@crm_app_name || @@crm_app_name%> </h1>
     <nav>
       <ul class="nav-bar">
         <li class="nav"> <a href="/"> Home </a></li>
